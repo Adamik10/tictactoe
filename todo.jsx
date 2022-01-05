@@ -1,5 +1,5 @@
-// show current player message
+// show current player message // DONE
 
-// calculate winner
+// calculate winner // DONE
 
-// after winner declared, stop the game
+// after winner declared, stop the game //DONE

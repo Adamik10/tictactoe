@@ -1,11 +1,11 @@
 import React from "react";
 import Square from "./Square";
 
-const Board = ({ squareState, handleSquareClick }) => {
+const Board = ({ boardState, handleSquareClick }) => {
   const renderSquare = (position) => {
     return (
       <Square
-        value={squareState[position]}
+        value={boardState[position]}
         onClick={() => {
           handleSquareClick(position);
         }}
