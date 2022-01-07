@@ -5,38 +5,37 @@ import { calculateWinner } from "./helpers";
 import "./styles/root.scss";
 
 const App = () => {
-  const [boardState, setBoardState] = useState(Array(9).fill(null));
-  const [isXnext, setIsXnext] = useState(true);
-
-  //this can be here and not in a state because it gets re-run on every update (click of the board)
-  const winner = calculateWinner(boardState);
-
+  // history state keeper
+  const [history, setHistory] = useState([
+    { boardState: Array(9).fill(null), isXnext: true },
+  ]);
+  const [currentMove, setCurrentMove] = useState(0);
+  const currentBoard = history[currentMove];
+  const winner = calculateWinner(currentBoard.boardState);
   const message = winner
     ? `The winner is ${winner}`
-    : `The next player is ${isXnext ? "X" : "O"}`;
+    : `The next player is ${currentBoard.isXnext ? "X" : "O"}`;
 
+  // handleSquareClick is pasted into the Board component and used there
   const handleSquareClick = (position) => {
-    if (winner) {
+    if (currentBoard.boardState[position] || winner) {
       return;
     }
-
-    setBoardState((prev) => {
-      return prev.map((square, pos) => {
-        if (square) {
-          return square;
+    setHistory((prev) => {
+      const lastMove = prev[prev.length - 1];
+      const newBoardState = lastMove.boardState.map((squareValue, index) => {
+        if (index === position) {
+          return lastMove.isXnext ? "X" : "O";
         }
-
-        if (pos === position) {
-          if (isXnext === true) {
-            setIsXnext(!isXnext);
-            return "X";
-          }
-          setIsXnext(!isXnext);
-          return "O";
-        }
-
-        return square;
+        return squareValue;
       });
+      return prev.concat({
+        boardState: newBoardState,
+        isXnext: !lastMove.isXnext,
+      });
+    });
+    setCurrentMove((previousMove) => {
+      return previousMove + 1;
     });
   };
 
@@ -44,7 +43,10 @@ const App = () => {
     <div className="app">
       <h1>TIC TAC TOE</h1>
       <h2>{message}</h2>
-      <Board boardState={boardState} handleSquareClick={handleSquareClick} />
+      <Board
+        currentBoard={currentBoard.boardState}
+        handleSquareClick={handleSquareClick}
+      />
     </div>
   );
 };
