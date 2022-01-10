@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Board from "./components/Board";
 import History from "./components/History";
 import { calculateWinner } from "./helpers";
+import Message from "./components/Message";
 
 import "./styles/root.scss";
 
@@ -13,9 +14,6 @@ const App = () => {
   const [currentMove, setCurrentMove] = useState(0);
   const currentBoard = history[currentMove];
   const winner = calculateWinner(currentBoard.boardState);
-  const message = winner
-    ? `The winner is ${winner}`
-    : `The next player is ${currentBoard.isXnext ? "X" : "O"}`;
   console.log(history);
 
   // handleSquareClick is pasted into the Board component and used there
@@ -48,7 +46,7 @@ const App = () => {
   return (
     <div className="app">
       <h1>TIC TAC TOE</h1>
-      <h2>{message}</h2>
+      <Message winner={winner} currentBoard={currentBoard} />
       <Board
         currentBoard={currentBoard.boardState}
         handleSquareClick={handleSquareClick}

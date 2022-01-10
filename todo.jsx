@@ -11,3 +11,6 @@
 // // inject dynamic data into the markup // DONE
 // // make the history treversible // DONE
 // // highlight the current move // DONE
+
+// refactor code to have message as its own component // DONE
+// add draw message // DONE
