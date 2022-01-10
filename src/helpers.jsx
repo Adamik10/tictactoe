@@ -1,7 +1,5 @@
 // this function calculates whether the current state of the board has a winner
 function calculateWinner(boardState) {
-  console.log(`this is from helpers: ${boardState}`);
-
   const winningSolutions = [
     [0, 1, 2],
     [3, 4, 5],
