@@ -1,16 +1,27 @@
 import React from "react";
 
-const Message = ({ winner, currentBoard }) => {
-  const noMoreMoves = currentBoard.boardState.every((value) => value !== null);
-
+const Message = ({ winner, currentBoard, noMoreMoves }) => {
   return (
-    <h2>
-      {winner && `The winner is ${winner}`}
-      {!winner &&
-        !noMoreMoves &&
-        `The next player is ${currentBoard.isXnext ? "X" : "O"}`}
+    <div className="status-message">
+      {winner && (
+        <>
+          The winner is{" "}
+          <span className={`${winner === "X" ? "text-green" : "text-yellow"}`}>
+            {winner}
+          </span>
+        </>
+      )}
+      {!winner && !noMoreMoves && (
+        <>
+          The next player is{" "}
+          <span className={`${winner === "X" ? "text-green" : "text-yellow"}`}>
+            {currentBoard.isXnext ? "X" : "O"}
+          </span>
+        </>
+      )}
+
       {!winner && noMoreMoves && `It's a draw. Better luck next time.`}
-    </h2>
+    </div>
   );
 };
 

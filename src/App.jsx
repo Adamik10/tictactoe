@@ -40,6 +40,8 @@ const App = () => {
     });
   };
 
+  const noMoreMoves = currentBoard.boardState.every((value) => value !== null);
+
   const goToTurn = (position) => {
     setCurrentMove(position);
   };
@@ -51,8 +53,14 @@ const App = () => {
 
   return (
     <div className="app">
-      <h1>TIC TAC TOE</h1>
-      <Message winner={winner} currentBoard={currentBoard} />
+      <h1>
+        TIC <span className="text-green">TAC</span> TOE
+      </h1>
+      <Message
+        winner={winner}
+        currentBoard={currentBoard}
+        noMoreMoves={noMoreMoves}
+      />
       <Board
         currentBoard={currentBoard.boardState}
         handleSquareClick={handleSquareClick}
@@ -64,6 +72,7 @@ const App = () => {
           onClick={() => {
             startNewGame();
           }}
+          className={`btn-reset ${winner || noMoreMoves ? "active" : ""}`}
         >
           START NEW GAME
         </button>
@@ -73,6 +82,7 @@ const App = () => {
         goToTurn={goToTurn}
         currentMove={currentMove}
       />
+      <div className="bg-decore" />
     </div>
   );
 };

@@ -18,3 +18,5 @@
 // add NEW GAME button // DONE
 
 // highlight winning squares // DONE
+
+// add final styles // DONE
