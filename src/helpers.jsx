@@ -16,15 +16,16 @@ function calculateWinner(boardState) {
 
   for (let i = 0; i < winningSolutions.length; i++) {
     const [a, b, c] = winningSolutions[i];
-
     if (
       boardState[a] &&
       boardState[a] === boardState[b] &&
       boardState[b] === boardState[c]
     ) {
-      return boardState[a];
+      // return boardState[a];
+      return { winner: boardState[a], winningCombination: [a, b, c] };
     }
   }
+  return { winner: null, winningCombination: [] };
 }
 
 export { calculateWinner };

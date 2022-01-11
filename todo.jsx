@@ -14,3 +14,7 @@
 
 // refactor code to have message as its own component // DONE
 // add draw message // DONE
+
+// add NEW GAME button // DONE
+
+// highlight winning squares // DONE
